@@ -52,6 +52,19 @@ function generateLocationQR() {
   new QRCode(document.getElementById("result"), geoURI);
 }
 
+// Generate Text QR
+function generateTextQR() {
+  const text = document.getElementById("text-input").value.trim();
+
+  if (!text) {
+    alert("Please enter some text.");
+    return;
+  }
+
+  document.getElementById("result").innerHTML = "";
+  new QRCode(document.getElementById("result"), text);
+}
+
 // ----------------------
 // Generate Email QR
 // ----------------------

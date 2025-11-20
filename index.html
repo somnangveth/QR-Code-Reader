@@ -98,8 +98,13 @@
 
           <!-- Text Panel -->
           <div id="panel-text" class="panel hidden">
-            <input type="text" id="input-fields" placeholder="Enter Text..." />
-            <button class="btn-design" onclick="generateQR()">Generate</button>
+            <textarea
+              id="text-input"
+              placeholder="Enter text here..."
+            ></textarea>
+            <button class="btn-design" onclick="generateTextQR()">
+              Generate Text QR
+            </button>
           </div>
 
           <!-- Location Panel -->

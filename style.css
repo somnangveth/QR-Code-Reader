@@ -70,6 +70,7 @@ body {
 
 /* Input fields --------------------------------------------- */
 #input-fields,
+#text-input,
 #email-address,
 #email-subject,
 #email-body,
@@ -90,6 +91,7 @@ body {
 }
 
 #input-fields:focus,
+#text-input:focus,
 #email-address:focus,
 #email-subject:focus,
 #email-body:focus,
