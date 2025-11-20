@@ -1,102 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QR Code Reader</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <div class="header">Group 3</div>
 
     <!-- Title -->
-     <div class="title">
-        <h1 id="qr-title">QR CODE READER</h1>
-        <div class="buttons">
-            <button class="btn-design" onclick="showPanel('scan')">Scan QR Code</button>
-            <button class="btn-design" onclick="showPanel('generate')">Genereate QR Code</button>
-        </div>
-     </div>
-
-
-
-<div class="main-body">
-
-    <!-- Scan QR Panel-->
-<div id="scan-qr" class="scan-qr hidden">
-
-    <input type="file" id="input-file"/>
-
-
-</div>
-
-    <!-- Generate QR Panel -->
-<div id="gen-qr" class="gen-qr hidden">
-    <div>
-        <input type="radio" name="qr-type" id="radio-link" onclick="radioPanel('link')" checked/>
-        <label for="radio-link">Link</label>
-        <input type="radio" name="qr-type" id="radio-text" onclick="radioPanel('text')"/>
-        <label for="radio-text">Text</label>
-        <input type="radio" name="qr-type" id="radio-location" onclick="radioPanel('location')"/>
-        <label for="radio-location">Location</label>
-        <input type="radio" name="qr-type" id="radio-email" onclick="radioPanel('email')"/>
-        <label for="radio-email">Email</label>
-        <input type="radio" name="qr-type" id="radio-phone" onclick="radioPanel('phone')"/>
-        <label for="radio-phone">Phone</label>
-        <input type="radio" name="qr-type" id="radio-wifi" onclick="radioPanel('wifi')"/>
-        <label for="radio-wifi">WiFi</label>
+    <div class="title">
+      <h1 id="qr-title">QR CODE READER</h1>
+      <div class="buttons">
+        <button class="btn-design" onclick="showPanel('scan')">
+          Scan QR Code
+        </button>
+        <button class="btn-design" onclick="showPanel('generate')">
+          Genereate QR Code
+        </button>
+      </div>
     </div>
 
-    <div id="body-two">
+    <div class="main-body">
+      <!-- Scan QR Panel-->
+      <div id="scan-qr" class="scan-qr hidden">
+        <input type="file" id="input-file" />
+      </div>
 
-        <!-- Link Panel -->
-        <div id="panel-link" class="panel">
-            <input type="url" id="input-fields" placeholder="Enter URL or Link..."/>
-            <button class="btn-design" onclick="generateQR()">Generate QR</button>
+      <!-- Generate QR Panel -->
+      <div id="gen-qr" class="gen-qr hidden">
+        <div>
+          <input
+            type="radio"
+            name="qr-type"
+            id="radio-link"
+            onclick="radioPanel('link')"
+            checked
+          />
+          <label for="radio-link">Link</label>
+          <input
+            type="radio"
+            name="qr-type"
+            id="radio-text"
+            onclick="radioPanel('text')"
+          />
+          <label for="radio-text">Text</label>
+          <input
+            type="radio"
+            name="qr-type"
+            id="radio-location"
+            onclick="radioPanel('location')"
+          />
+          <label for="radio-location">Location</label>
+          <input
+            type="radio"
+            name="qr-type"
+            id="radio-email"
+            onclick="radioPanel('email')"
+          />
+          <label for="radio-email">Email</label>
+          <input
+            type="radio"
+            name="qr-type"
+            id="radio-phone"
+            onclick="radioPanel('phone')"
+          />
+          <label for="radio-phone">Phone</label>
+          <input
+            type="radio"
+            name="qr-type"
+            id="radio-wifi"
+            onclick="radioPanel('wifi')"
+          />
+          <label for="radio-wifi">WiFi</label>
         </div>
 
-        <!-- Text Panel -->
-        <div id="panel-text" class="panel hidden">
-            <input type="text" id="input-fields" placeholder="Enter Text..."/>
-            <button class="btn-design" onclick="generateQR()">Generate </button>   
+        <div id="body-two">
+          <!-- Link Panel -->
+          <div id="panel-link" class="panel">
+            <input
+              type="url"
+              id="input-fields"
+              placeholder="Enter URL or Link..."
+            />
+            <button class="btn-design" onclick="generateQR()">
+              Generate QR
+            </button>
+          </div>
+
+          <!-- Text Panel -->
+          <div id="panel-text" class="panel hidden">
+            <input type="text" id="input-fields" placeholder="Enter Text..." />
+            <button class="btn-design" onclick="generateQR()">Generate</button>
+          </div>
+
+          <!-- Location Panel -->
+          <div id="panel-location" class="panel hidden">
+            <div
+              id="map"
+              style="height: 300px; width: 50%; margin-bottom: 10px"
+            ></div>
+            <p>Latitude: <span id="lat"></span></p>
+            <p>Longitude: <span id="lng"></span></p>
+            <button class="btn-design" onclick="generateLocationQR()">
+              Generate Location QR
+            </button>
+          </div>
+
+          <!-- Email Panel -->
+          <div id="panel-email" class="panel hidden">
+            <input
+              type="email"
+              id="email-address"
+              placeholder="Email address..."
+            />
+            <input
+              type="text"
+              id="email-subject"
+              placeholder="Subject (optional)..."
+            />
+            <textarea
+              id="email-body"
+              placeholder="Message (optional)..."
+            ></textarea>
+            <button class="btn-design" onclick="generateEmailQR()">
+              Generate Email QR
+            </button>
+          </div>
+
+          <!-- Phone Panel -->
+          <div id="panel-phone" class="panel hidden">
+            <input
+              type="tel"
+              id="phone-number"
+              placeholder="Enter phone number..."
+            />
+            <button class="btn-design" onclick="generatePhoneQR()">
+              Generate Phone QR
+            </button>
+          </div>
+
+          <!-- WiFi Panel -->
+          <div id="panel-wifi" class="panel hidden">
+            <input
+              type="text"
+              id="wifi-ssid"
+              placeholder="Network Name (SSID)..."
+            />
+            <input
+              type="password"
+              id="wifi-password"
+              placeholder="Password..."
+            />
+
+            <select id="wifi-auth">
+              <option value="WPA">WPA/WPA2</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">No Password</option>
+            </select>
+
+            <button class="btn-design" onclick="generateWifiQR()">
+              Generate WiFi QR
+            </button>
+          </div>
+
+          <div id="result"></div>
         </div>
-
-        <!-- Location Panel -->
-         <div id="panel-location" class="panel hidden">
-                <div id="map" style="height: 300px; width: 50%; margin-bottom: 10px;"></div>
-                <p>Latitude: <span id="lat"></span></p>
-                <p>Longitude: <span id="lng"></span></p>
-                <button class="btn-design" onclick="generateLocationQR()">Generate Location QR</button>
-         </div>
-
-        <!-- Email -->
-         <div id="panel-email" class="panel hidden">
-
-         </div>
-
-        <!-- Phone -->
-         <div id="panel-phone" class="panel hidden">
-
-         </div>
-
-        <!-- WiFi -->
-         <div id="panel-wifi" class="panel hidden">
-
-         </div>
-        <div id="result"></div>
+      </div>
     </div>
 
-</div>
-
-</div>
-
-<script src="qr.js"></script>
-<script src="panel.js"></script>
-
-</body>
+    <script src="qr.js"></script>
+    <script src="panel.js"></script>
+  </body>
 </html>
