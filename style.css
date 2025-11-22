@@ -1,74 +1,375 @@
-body{
+/* ===== GLOBAL (FIXED) ===== */
+
+body {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh; 
     background-color: #c6c6c1;
     font-family: "Consolas", "Courier New", monospace;
+    padding: 10px; 
+    box-sizing: border-box;
 }
 
-/* Header */
-.header{
+/* Header (ENHANCED) */
+.header {
     background-color: #0046FF;
     color: #EEEEEE;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 3px solid #000; 
 }
 
-/* Title */
+/* Title (FIXED & ENHANCED) */
+/* *** CRITICAL FIX: Ensure this universally hides elements and overrides Flexbox/Grid *** */
 .hidden {
-    display: none;
+    display: none !important; 
 }
-#qr-title{
-font-size: 50px;
+
+#qr-title {
+    font-size: 50px;
 }
-.title{
+
+.title {
     display: flex;
+    height: 250px; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
+    border: 3px solid #000; 
+    margin-bottom: 20px;
 }
-.buttons{
+
+#img-title {
+    width: 200px;
+    height: auto;     
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.buttons {
     display: flex;
     flex-direction: row;
+    gap: 10px;
 }
-.btn-design{
+
+.btn-design {
     background-color: #DDDAD0;
     color: #000;
-    margin: 5px;
-    height: 30px;
+    margin: 5px 0;
+    width: 180px;
+    height: 35px;
+    padding: 0 15px;
     font-size: 15px;
+    /* Retro Button Styling */
+    border: 3px solid #000;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 0 #000;
+    transition: background-color 0.1s;
 }
 
-.main-body{
+.btn-design:hover {
+    background-color: #B0AFAF;
+}
+
+.btn-design:active {
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+/* Main Body (FIXED) */
+.main-body {
+    display: flex;
+    flex-direction: column; 
     background-color: #fff;
     margin-top: 10px;
-    min-height: 70vh;
+    min-height: 50vh;
+    padding: 20px;
+    border: 3px solid #000;
+    flex-grow: 1;
 }
 
-.gen-qr{
-    margin: 10px;
-}
-
-/* Input Fields */
-#input-fields{
-    margin-top: 40px;
-    border: 1px solid #000;
-    background: #fff;
-    padding: 3px;
-    height: 20px;
-    width: 550px;
-    font-family: inherit;
-}
-.body-two{
+.scan-qr, .gen-qr {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
 }
-@media (min-width: 640px) {
 
-#result{
+/* Input field */
+.input-fields {
+    margin: 5px 0;
+    border: 2px solid #000;
+    background: #fff;
+    padding: 8px;
+    height: auto;
+    width: 100%; 
+    max-width: 550px; 
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.input-message{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    border: 2px solid #000;
+    height: 50px;
+    width: 550px;
+}
+
+/* Radio button container styling */
+.gen-qr > div:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #000;
+}
+
+
+/* === DEFAULT (MOBILE) — 1 COLUMN (ENHANCED) === */
+#body-two {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.qr-result-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+}
+
+
+
+/* QR Result Styling */
+#qr-frame{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 320px;
+    width: 320px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 3px solid #000; 
+}
+
+#result {
+    width: 290px;
+    height: 290px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: #fff;
+    border: none; 
+}
+
+/* Download buttons alignment */
+#body-two > div:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     margin-top: 10px;
-    border: 5px solid #c6c6c1;
-    display:inline-flex;
 }
+
+
+/* ===== SM — STILL 1 COLUMN (CLEANUP) ===== */
+@media (min-width: 640px) {
+    #body-two {
+        flex-direction: column;
+    }
 }
+
+/* ===== XL — 2 COLUMNS (FIXED) ===== */
+@media (min-width: 1280px) {
+    .main-body {
+        max-width: 1280px;
+        margin: 10px auto;
+    }
+    
+    #body-two {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 60px;
+    }
+
+    .plane-wrapper {
+        flex: 1;
+        min-width: 600px;
+    }
+
+    /* Adjustments for the QR result block in 2-column layout */
+    .qr-result-block {
+        flex-shrink: 0;
+        align-items: flex-start; 
+    }
+
+    #qr-frame{
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    
+    .color-palette {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    /* Align download buttons to the QR frame */
+    #body-two > div:last-child {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 0;
+        width: 320px; 
+    }
+    
+    #body-two > div:last-child button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+/* ===== FRAME UPLOAD ===== */
+#frame {
+    margin: 20px auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #000; 
+    background: #c6c2c2;
+    height: 350px;
+    width: 350px;
+}
+
+#file-btn {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid #000; 
+    background: #fff;
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+    text-align: center;
+    box-shadow: 2px 2px 0 0 #000;
+}
+
+#file-btn:hover {
+    background-color: #DDDAD0;
+}
+
+#file-btn:active {
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+#phone-design{
+    display: flex
+}
+#country-input{
+    display: flex;
+    border: 2px solid #000;
+    width: 150px;
+    height: 38px;
+    text-align: center;
+    appearance: none;
+    margin-right: 10px;
+}
+
+#input-phone{
+    height: 30px;
+    width: 300px;
+    border: 2px solid #000;
+}
+
+.scan-frame{
+    display: flex;
+    gap: 10px;
+}
+
+/* Wrap both text and button */
+.result-container {
+    position: relative;
+    width: 300px;
+    height: 350px;
+}
+
+/* result text */
+.result-text {
+    display: flex;
+    margin-top: 20px;
+    height: 350px;
+    width: 300px;
+    border: 2px solid #000;
+    background-color: #fff;
+    color: #000;
+    font-family: inherit;
+    padding: 5px;
+    overflow: auto;
+}
+
+/* Position button bottom-right */
+#copy-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    
+    background-color: #DDDAD0;
+    color: #000;
+    width: 60px;
+    height: 30px;
+    font-size: 10px;
+    border: 3px solid #000;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 0 #000;
+}
+
+
+/* Wifi */
+.wifi-frame{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-password{
+    display: flex;
+    gap: 2px;
+}
+
+#wifi-input{
+    border: 2px solid #000;
+    height: 30px;
+    width: 250px;
+    margin: 5px;
+}
+#password-input{
+    border: 2px solid #000;
+    height: 30px;
+    width: 250px;
+    margin: 5px;
+}
+
+#enc{
+    border: 2px solid #000;
+    height: 30px;
+    width: 257px;
+    margin-left: 5px;
+    appearance: none;
+}
+
+

@@ -19,8 +19,8 @@ function radioPanel(type){
     document.getElementById('panel-email').classList.add('hidden');
     document.getElementById('panel-phone').classList.add('hidden');
     document.getElementById('panel-wifi').classList.add('hidden');
-
-    document.getElementById(`panel-${type}`).classList.remove('hidden');
+    document.getElementById('result').innerHTML="";
+    if(document.getElementById(`panel-${type}`).classList.remove('hidden'));
     if (type === "location") {
         setTimeout(() => {
             initMap();
